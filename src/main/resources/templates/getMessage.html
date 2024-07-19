@@ -1,0 +1,32 @@
+<html xmlns="http://www.w3.org/1999/xhtml" xmlns:th="http://www.thymeleaf.org">
+<head>
+    <p>Note management panel</p>
+</head>
+<body>
+<div>
+    <table th:if="${#lists.size(messages) > 0}">
+        <thead>
+        <tr>
+            <th>Note</th>
+        </tr>
+        </thead>
+        <tbody>
+        <tr th:each="note : ${messages}">
+            <td th:text="${note.message}">Note</td>
+            <td>
+                <form th:action="@{/message/panel/delete}" th:method="post">
+                <input style="visibility:hidden;" th:value="${note.messageId}" type="text" name="messageId"/>
+                <button style="background-color:red;border:solid;border-radius:30px;" type="submit">delete</button>
+                </form>
+            </td>
+        </tr>
+        </tbody>
+    </table>
+    <p>Add note</p>
+    <form th:action="@{/message/panel/create}" th:object="${messageDto}" th:method="post">
+        <input placeholder="note" type="text" th:field="*{message}"/>
+        <button type="submit">Add</button>
+    </form>
+</div>
+</body>
+</html>
