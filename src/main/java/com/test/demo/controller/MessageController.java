@@ -2,9 +2,11 @@ package com.test.demo.controller;
 
 import com.test.demo.dto.*;
 import com.test.demo.service.IMessageService;
+import jakarta.validation.Valid;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.http.HttpStatus;
 import org.springframework.http.ResponseEntity;
+import org.springframework.validation.BindingResult;
 import org.springframework.web.bind.annotation.*;
 import org.springframework.web.servlet.view.RedirectView;
 
@@ -23,9 +25,24 @@ public class MessageController {
     }
 
     @PostMapping("/panel/create")
-    public RedirectView generateMessageFromPanel(@ModelAttribute MessageDto message)
+    public RedirectView generateMessageFromPanel(@Valid MessageDto message, BindingResult result)
     {
+        if (result.hasErrors()) {
+            return new RedirectView("/panel");
+        }
+
         generateMessage(message);
+        return new RedirectView("/panel");
+    }
+
+    @PostMapping("/panel/update")
+    public RedirectView updateMessageFromPanel(@Valid MessageDto message, BindingResult result)
+    {
+        if (result.hasErrors()) {
+            return new RedirectView("/panel");
+        }
+
+        updateMessage(message);
         return new RedirectView("/panel");
     }
 
@@ -37,6 +54,13 @@ public class MessageController {
     }
 
     @PutMapping
+    public ResponseEntity<String> updateMessage(@RequestBody MessageDto message)
+    {
+        var response = messageService.updateMessage(message);
+        return new ResponseEntity<String>(response.getMessage(), HttpStatus.OK);
+    }
+
+    @PostMapping
     public ResponseEntity<String> generateMessage(@RequestBody MessageDto message)
     {
         var response = messageService.createMessage(message);

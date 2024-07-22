@@ -8,6 +8,7 @@ import java.util.List;
 
 public interface IMessageService {
     IMessageEvent createMessage(MessageDto message);
+    IMessageEvent updateMessage(MessageDto message);
     IDto getMessage(String messageId);
     IMessageEvent deleteMessage(String messageId);
     List<MessageDto> getAllMessages();

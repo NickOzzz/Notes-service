@@ -1,11 +1,15 @@
 package com.test.demo.dto;
 
 import jakarta.persistence.*;
+import jakarta.validation.constraints.NotBlank;
+import jakarta.validation.constraints.NotEmpty;
 
 @Entity
 @Table(name = "message_details")
 public class MessageDto implements IDto {
 
+    @NotBlank(message="Note cannot be empty or contain whitespaces")
+    @NotEmpty(message="Note cannot be empty or contain whitespaces")
     @Column(name = "message")
     private String message;
 

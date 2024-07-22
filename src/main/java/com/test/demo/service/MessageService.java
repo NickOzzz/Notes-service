@@ -40,6 +40,21 @@ public class MessageService implements IMessageService {
 
     @Override
     @Transactional
+    public IMessageEvent updateMessage(MessageDto message)
+    {
+        try
+        {
+            sqlExecutor.merge(message);
+            return new MessageUpdatedEvent(message.getMessageId().toString(), message.getMessage());
+        }
+        catch(Exception ex)
+        {
+            return new MessageFailedEvent(message.getMessageId().toString(), Operations.Update);
+        }
+    }
+
+    @Override
+    @Transactional
     public IDto getMessage(String messageId)
     {
         var message = sqlExecutor.find(MessageDto.class, messageId);

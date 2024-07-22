@@ -13,7 +13,7 @@ import org.springframework.web.bind.annotation.RequestMapping;
 @RequestMapping("panel")
 public class MessagePageController {
 
-    private IMessageService messageService;
+    private final IMessageService messageService;
 
     @Autowired
     public MessagePageController(IMessageService messageService)
