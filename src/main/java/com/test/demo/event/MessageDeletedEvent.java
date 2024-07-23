@@ -1,4 +1,4 @@
-package com.test.demo.dto;
+package com.test.demo.event;
 
 public class MessageDeletedEvent implements IMessageEvent {
     private String messageId;

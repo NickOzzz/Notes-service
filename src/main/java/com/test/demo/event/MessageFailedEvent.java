@@ -1,4 +1,6 @@
-package com.test.demo.dto;
+package com.test.demo.event;
+
+import com.test.demo.dto.Operations;
 
 public class MessageFailedEvent implements IMessageEvent {
     private final String messageId;

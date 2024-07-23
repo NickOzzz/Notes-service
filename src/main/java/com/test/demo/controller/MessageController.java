@@ -1,6 +1,7 @@
 package com.test.demo.controller;
 
 import com.test.demo.dto.*;
+import com.test.demo.exception.MessageNotFoundException;
 import com.test.demo.service.IMessageService;
 import jakarta.validation.Valid;
 import org.springframework.beans.factory.annotation.Autowired;
@@ -10,6 +11,7 @@ import org.springframework.validation.BindingResult;
 import org.springframework.web.bind.annotation.*;
 import org.springframework.web.servlet.view.RedirectView;
 
+import java.util.Date;
 import java.util.List;
 
 @RestController
@@ -56,6 +58,7 @@ public class MessageController {
     @PutMapping
     public ResponseEntity<String> updateMessage(@RequestBody MessageDto message)
     {
+        message.setTime(new Date(System.currentTimeMillis()).toString());
         var response = messageService.updateMessage(message);
         return new ResponseEntity<String>(response.getMessage(), HttpStatus.OK);
     }
@@ -63,6 +66,7 @@ public class MessageController {
     @PostMapping
     public ResponseEntity<String> generateMessage(@RequestBody MessageDto message)
     {
+        message.setTime(new Date(System.currentTimeMillis()).toString());
         var response = messageService.createMessage(message);
         return new ResponseEntity<String>(response.getMessage(), HttpStatus.OK);
     }
@@ -76,15 +80,9 @@ public class MessageController {
 
     @GetMapping("/{messageId}")
     public ResponseEntity<MessageDto> getMessage(@PathVariable String messageId)
-            throws MessageNotFound
+            throws MessageNotFoundException
     {
         var response = messageService.getMessage(messageId);
-
-        if (response instanceof FailedMessageDto)
-        {
-            throw new MessageNotFound(messageId);
-        }
-
         return new ResponseEntity<MessageDto>((MessageDto)response, HttpStatus.OK);
     }
 

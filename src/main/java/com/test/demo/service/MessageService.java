@@ -1,6 +1,8 @@
 package com.test.demo.service;
 
 import com.test.demo.dto.*;
+import com.test.demo.event.*;
+import com.test.demo.exception.MessageNotFoundException;
 import jakarta.persistence.EntityManager;
 import jakarta.transaction.Transactional;
 import org.springframework.beans.factory.annotation.Autowired;
@@ -56,12 +58,13 @@ public class MessageService implements IMessageService {
     @Override
     @Transactional
     public IDto getMessage(String messageId)
+            throws MessageNotFoundException
     {
         var message = sqlExecutor.find(MessageDto.class, messageId);
 
         if (message == null)
         {
-            return new FailedMessageDto("Could not retrieve message by Id " + messageId);
+            throw new MessageNotFoundException("Could not retrieve message by Id " + messageId);
         }
         return message;
     }

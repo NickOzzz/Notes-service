@@ -1,0 +1,100 @@
+    html {
+      overflow-y: scroll;
+      overflow-x:hidden;
+    }
+    td {
+      word-wrap: break-word;
+      overflow-wrap: break-word;
+    }
+    #title {
+      font-size:30px;
+      margin-bottom:100px;
+    }
+    #main-section {
+      position: relative;
+      left: 50%;
+      width:50%;
+      z-index:1;
+      -webkit-transform: translate(-50%, -50%);
+      transform: translate(-50%, -50%);
+    }
+    #main-section-container {
+      position:fixed;
+      width:100%
+    }
+    #main-section-table {
+      table-layout:fixed;
+    }
+    #main-section-table-note {
+      width:65%;
+    }
+    #main-section-table-delete-input {
+      visibility:hidden;
+      position:fixed;
+    }
+    #main-section-table-delete-button {
+      margin-top:5px;
+    }
+    #main-section-table-edit-button {
+      margin-right:15px;
+      margin-top:5px;
+    }
+    #main-section-add-note-title {
+      font-size:20px;
+      margin-top:30px;
+    }
+    #main-section-add-note-textarea {
+      resize:none;
+      margin-top:30px;
+    }
+    #main-section-add-note-button {
+      margin-bottom:30px;
+      margin-top:15px;
+      margin-right:5px;
+      width:15%;
+    }
+    #no-notes-warning {
+      margin-bottom:50px;
+    }
+    #update-note-popup {
+      position:absolute;
+      left:25%;
+      z-index:2;
+      background-color:white;
+      width:50%;
+      height:50%;
+      box-shadow: rgba(0, 0, 0, 0.56) 0px 22px 70px 4px;
+      text-align: center;
+      border: 2px solid white;
+      border-radius:20px;
+      visibility:hidden;
+    }
+    #update-note-popup-title {
+      font-size:20px;
+      margin-top:30px;
+    }
+    #update-note-popup-close-button {
+      margin-left:40px;
+    }
+    #update-note-popup-close-button:hover {
+      background-color:#666666
+    }
+    #update-note-input {
+      visibility:hidden;
+    }
+    #update-note-textarea {
+      resize:none;
+      height:50%;
+      width:94%;
+      margin-left:25px;
+    }
+    #update-note-button {
+      margin-top:15;
+      margin-right:40px;
+    }
+    .btn-success.btn-outline {
+      background-color: #5cb85c;
+    }
+    .btn-success:hover {
+      background-color: #154734;
+    }

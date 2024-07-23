@@ -13,6 +13,9 @@ public class MessageDto implements IDto {
     @Column(name = "message")
     private String message;
 
+    @Column(name="create_time")
+    private String timeOfCreation;
+
     @Id
     @GeneratedValue(strategy = GenerationType.IDENTITY)
     @Column(name = "id")
@@ -28,6 +31,11 @@ public class MessageDto implements IDto {
         this.messageId = messageId;
     }
 
+    public void setTime(String time)
+    {
+        timeOfCreation = time;
+    }
+
     public String getMessage()
     {
            return this.message;
@@ -36,5 +44,10 @@ public class MessageDto implements IDto {
     public Integer getMessageId()
     {
         return this.messageId;
+    }
+
+    public String getTimeOfCreation()
+    {
+        return this.timeOfCreation;
     }
 }
