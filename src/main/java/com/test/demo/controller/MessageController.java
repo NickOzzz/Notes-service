@@ -55,19 +55,19 @@ public class MessageController {
         return new RedirectView("/panel");
     }
 
-    @PutMapping
-    public ResponseEntity<String> updateMessage(@RequestBody MessageDto message)
-    {
-        message.setTime(new Date(System.currentTimeMillis()).toString());
-        var response = messageService.updateMessage(message);
-        return new ResponseEntity<String>(response.getMessage(), HttpStatus.OK);
-    }
-
     @PostMapping
     public ResponseEntity<String> generateMessage(@RequestBody MessageDto message)
     {
         message.setTime(new Date(System.currentTimeMillis()).toString());
         var response = messageService.createMessage(message);
+        return new ResponseEntity<String>(response.getMessage(), HttpStatus.OK);
+    }
+
+    @PutMapping
+    public ResponseEntity<String> updateMessage(@RequestBody MessageDto message)
+    {
+        message.setTime(new Date(System.currentTimeMillis()).toString());
+        var response = messageService.updateMessage(message);
         return new ResponseEntity<String>(response.getMessage(), HttpStatus.OK);
     }
 
