@@ -9,6 +9,8 @@ import org.springframework.ui.Model;
 import org.springframework.web.bind.annotation.GetMapping;
 import org.springframework.web.bind.annotation.RequestMapping;
 
+import java.util.List;
+
 @Controller
 @RequestMapping("panel")
 public class MessagePageController {
@@ -24,7 +26,7 @@ public class MessagePageController {
     @GetMapping
     public String OpenPanel(Model model)
     {
-        var messages = messageService.getAllMessages();
+        List<MessageDto> messages = messageService.getAllMessages();
 
         model.addAttribute("messages", messages);
         model.addAttribute("messageDto", new MessageDto());

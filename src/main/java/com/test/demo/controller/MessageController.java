@@ -10,6 +10,7 @@ import org.springframework.http.ResponseEntity;
 import org.springframework.validation.BindingResult;
 import org.springframework.web.bind.annotation.*;
 import org.springframework.web.servlet.view.RedirectView;
+import com.test.demo.event.IMessageEvent;
 
 import java.util.Date;
 import java.util.List;
@@ -59,7 +60,7 @@ public class MessageController {
     public ResponseEntity<String> generateMessage(@RequestBody MessageDto message)
     {
         message.setTime(new Date(System.currentTimeMillis()).toString());
-        var response = messageService.createMessage(message);
+        IMessageEvent response = messageService.createMessage(message);
         return new ResponseEntity<String>(response.getMessage(), HttpStatus.OK);
     }
 
@@ -67,14 +68,14 @@ public class MessageController {
     public ResponseEntity<String> updateMessage(@RequestBody MessageDto message)
     {
         message.setTime(new Date(System.currentTimeMillis()).toString());
-        var response = messageService.updateMessage(message);
+        IMessageEvent response = messageService.updateMessage(message);
         return new ResponseEntity<String>(response.getMessage(), HttpStatus.OK);
     }
 
     @DeleteMapping("/{messageId}")
     public ResponseEntity<String> deleteMessage(@PathVariable String messageId)
     {
-        var response = messageService.deleteMessage(messageId);
+        IMessageEvent response = messageService.deleteMessage(messageId);
         return new ResponseEntity<String>(response.getMessage(), HttpStatus.OK);
     }
 
@@ -82,14 +83,14 @@ public class MessageController {
     public ResponseEntity<MessageDto> getMessage(@PathVariable String messageId)
             throws MessageNotFoundException
     {
-        var response = messageService.getMessage(messageId);
+        IDto response = messageService.getMessage(messageId);
         return new ResponseEntity<MessageDto>((MessageDto)response, HttpStatus.OK);
     }
 
     @GetMapping
     public ResponseEntity<List<MessageDto>> getAllMessages()
     {
-        var response = messageService.getAllMessages();
+        List<MessageDto> response = messageService.getAllMessages();
 
         return new ResponseEntity<List<MessageDto>>(response, HttpStatus.OK);
     }

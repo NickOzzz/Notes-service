@@ -18,8 +18,8 @@ public class LogAspect {
     {
         currentTime = System.currentTimeMillis();
 
-        var messageId = joinPoint.getArgs()[0];
-        var methodName = joinPoint.getSignature().getName();
+        Object messageId = joinPoint.getArgs()[0];
+        Object methodName = joinPoint.getSignature().getName();
 
         if (messageId instanceof MessageDto)
         {
@@ -44,8 +44,8 @@ public class LogAspect {
     @After("logMessagePointCut()")
     public void logMessageOperationAfter(JoinPoint joinPoint)
     {
-        var totalTime = System.currentTimeMillis() - currentTime;
-        var methodName = joinPoint.getSignature().getName();
+        Object totalTime = System.currentTimeMillis() - currentTime;
+        Object methodName = joinPoint.getSignature().getName();
         System.out.println("Finishing call to " + methodName + "; Execution time: " + totalTime + " millis");
     }
 }
