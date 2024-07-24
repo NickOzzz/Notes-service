@@ -1,4 +1,4 @@
-FROM arm32v7/openjdk:17-jdk-slim
+FROM arm32v7/openjdk:11.0.3-jdk-slim
 
 ADD /out/artifacts/demo_jar/demo.jar /out/demo.jar
 
