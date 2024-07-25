@@ -3,9 +3,9 @@ package com.test.demo.service;
 import com.test.demo.dto.*;
 import com.test.demo.event.*;
 import com.test.demo.exception.MessageNotFoundException;
-import jakarta.persistence.EntityManager;
-import jakarta.persistence.Query;
-import jakarta.transaction.Transactional;
+import javax.persistence.EntityManager;
+import javax.persistence.Query;
+import javax.transaction.Transactional;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.beans.factory.config.ConfigurableBeanFactory;
 import org.springframework.context.annotation.Scope;
@@ -61,7 +61,7 @@ public class MessageService implements IMessageService {
     public IDto getMessage(String messageId)
             throws MessageNotFoundException
     {
-        MessageDto message = sqlExecutor.find(MessageDto.class, messageId);
+        MessageDto message = sqlExecutor.find(MessageDto.class, Integer.parseInt(messageId));
 
         if (message == null)
         {
@@ -74,7 +74,7 @@ public class MessageService implements IMessageService {
     @Transactional
     public IMessageEvent deleteMessage(String messageId)
     {
-        MessageDto message = sqlExecutor.find(MessageDto.class, messageId);
+        MessageDto message = sqlExecutor.find(MessageDto.class, Integer.parseInt(messageId));
         if (message == null)
         {
             return new MessageFailedEvent(messageId, Operations.Delete);

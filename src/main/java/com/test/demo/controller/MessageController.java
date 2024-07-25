@@ -3,7 +3,7 @@ package com.test.demo.controller;
 import com.test.demo.dto.*;
 import com.test.demo.exception.MessageNotFoundException;
 import com.test.demo.service.IMessageService;
-import jakarta.validation.Valid;
+import javax.validation.Valid;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.http.HttpStatus;
 import org.springframework.http.ResponseEntity;
